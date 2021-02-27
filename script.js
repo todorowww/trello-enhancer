@@ -1,5 +1,3 @@
-// Trello Enhancer
-
 // Listeners
 
 document.addEventListener('click', (e) => {
