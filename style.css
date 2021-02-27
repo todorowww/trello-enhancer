@@ -1,0 +1,23 @@
+.card-short-id.hide {
+	display: inline !important;
+	font-weight: bold;
+    background-color: #ee0;
+    border-radius: 3px;
+    padding: 0 5px;
+    margin-right: 3px;
+}
+
+.card-short-id:hover {
+	opacity: .5;
+}
+
+.card-id-details {
+	font-weight: bold;
+    font-size: 16px;
+    margin: 20px;
+    width: 100px;
+    background-color: #ee0;
+    border-radius: 3px;
+    text-align: center;
+    padding: 5px 0;
+}
