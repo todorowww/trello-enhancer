@@ -7,8 +7,10 @@
     margin-right: 3px;
 }
 
-.card-short-id:hover {
+.card-short-id:hover,
+.card-id-details:hover {
 	opacity: .5;
+    cursor: pointer;
 }
 
 .card-id-details {
