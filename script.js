@@ -1,3 +1,8 @@
+// We need this part in order to display card id on details page and title, when user middle-clicks on card (open in new tab)
+detailsReady().then(function() {
+    displayCardId(window.location.href);
+});
+
 // Listeners
 
 document.addEventListener('click', (e) => {
@@ -20,25 +25,19 @@ document.addEventListener('mouseup', (e) => {
 	const el = e.originalTarget;
     let parent = el.parentElement;
 
-
     if (parent.getAttribute('class').indexOf('list-card') !== -1) {
         detailsReady().then(function() { 
             let href = el.parentElement.getAttribute('href');
             if (href === null) {
                 href = el.parentElement.parentElement.getAttribute('href');
             }
-            
-            let cardDetails = document.getElementsByClassName('card-detail-window')[0];
-            let header = document.getElementsByClassName('window-header')[0];
-            
-            let cardNumberDiv = document.createElement('div');
-            cardNumberDiv.className = 'card-id-details';
-            cardNumberDiv.title = "Click to copy card ID";
-            var textNode = document.createTextNode(getCardId(href));
 
-            cardNumberDiv.appendChild(textNode);
-            cardDetails.insertBefore(cardNumberDiv, header);
-
+            let detailIds = document.getElementsByClassName('card-id-details');
+            if (detailIds.length > 0) {
+                detailIds[0].textContent = getCardId(href);
+            } else {
+                displayCardId(href);
+            }
         }, function (error) {
             console.error(error);
         });
@@ -62,8 +61,8 @@ window.addEventListener('load', function() {
                             hrefReady(node).then(function(href) {
                                 let card = node.querySelectorAll('span.list-card-title.js-card-name')[0];
                                 let shortIdSpan = document.createElement('span');
-                                shortIdSpan.innerHTML = '#' + getCardId(href);
                                 shortIdSpan.className = 'card-short-id hide';
+                                shortIdSpan.appendChild(document.createTextNode('#' + getCardId(href)));
                                 card.insertBefore(shortIdSpan, card.firstChild);
                             }, function(error) {
                                 console.error(error);
@@ -76,7 +75,6 @@ window.addEventListener('load', function() {
     });
 
     observer.observe(target, options);
-
 });
 
 // Functions
@@ -88,12 +86,24 @@ function getCardId(url) {
     return s.substr(0, s.indexOf('-'));
 }
 
+function displayCardId(href) {
+    let cardDetails = document.getElementsByClassName('card-detail-window')[0];
+    let header = document.getElementsByClassName('window-header')[0];
+    
+    let cardNumberDiv = document.createElement('div');
+    cardNumberDiv.className = 'card-id-details';
+    cardNumberDiv.title = "Click to copy card ID";
+    let textNode = document.createTextNode(getCardId(href));
+    cardNumberDiv.appendChild(textNode);
+    cardDetails.insertBefore(cardNumberDiv, header);
+    document.title = '#' + getCardId(href) + ' | ' + document.title;
+}
 
 // Promises
 
 function detailsReady() {
     let promise = new Promise(function(resolve, reject) {
-        let timeout = 50;
+        let timeout = 100;
         let listener = function(interval) {
             let modal = document.getElementsByClassName('window-title');
             if (modal.length !== 0) {

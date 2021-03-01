@@ -9,7 +9,7 @@
     "description": "Display card ID in Trello cards, and in detail view, copy card ID on click, and more...",
     "author": "Alexander Ploner",
     "homepage_url": "https://github.com/todorowww/trello-enhancer",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "icons": {
         "48": "images/icon48.png",
         "128": "images/icon128.png"
