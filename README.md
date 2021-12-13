@@ -12,3 +12,6 @@
 This addon was heavily influenced by:
 - [John DeWyze - Trello Card Numbers](https://github.com/dewyze/trello-card-numbers)
 - [Alexander Ploner - Trello Card ID](https://github.com/alex-pl/trello-card-id)
+
+## Forked by
+Škola Rajak
